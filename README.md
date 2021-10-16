@@ -44,3 +44,9 @@ Given this log, we would want to return an Array that looks like this:
 Importantly, the room is physically empty at the start and end of the day. So we can be certain that if a person's first entry is an `exit` or last entry is an `enter` that they are missing a log.
 
 Since we are really just trying to debug a hardware problem, we don't need an exhaustive list of every missing log. Rather, we want a list of missing exits and missing entries where an employee **appears only once** in each list. If Paul has multiple missing entry logs, he should only appear once in the `missingEntries` Array. However, if he had a missing entry **and** a missing exit, he should appear once in both Arrays.
+
+## Completing the Exercise
+
+Expect to do your work in the static `getMissingLogs` method here: [App.java](#src/main/java/com/dmsi/cardreader/App.java)  
+
+A small suite of unit tests have been provided to check your work: [AppTest.java](#src/test/java/com/dmsi/cardreader/AppTest.java)
