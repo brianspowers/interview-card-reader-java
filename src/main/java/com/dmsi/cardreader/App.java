@@ -1,5 +1,8 @@
 package com.dmsi.cardreader;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class App {
 
   public enum Scan {
@@ -33,6 +36,33 @@ public class App {
    * missing exit logs
    */
   public static String[][] getMissingLogs(Log[] logs) {
-    return new String[][]{new String[0], new String[0]};
+
+    Set<String> inRoom = new HashSet<String>();
+
+    Set<String> missingEntries = new HashSet<String>();
+    Set<String> missingExits = new HashSet<String>();
+
+    for (Log log : logs) {
+      if (log.scan == Scan.ENTER) {
+        if (inRoom.contains(log.employee)) {
+          missingExits.add(log.employee);
+        } else {
+          inRoom.add(log.employee);
+        }
+      }
+      if (log.scan == Scan.EXIT) {
+        if (!inRoom.contains(log.employee)) {
+          missingEntries.add(log.employee);
+        } else {
+          inRoom.remove(log.employee);
+        }
+      }
+    }
+
+    for (String employee : inRoom) {
+      missingExits.add(employee);
+    }
+
+    return new String[][]{missingEntries.toArray(new String[0]), missingExits.toArray(new String[0])};
   }
 }
